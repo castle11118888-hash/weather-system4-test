@@ -4,12 +4,12 @@
 // 注意：真正保護資料的是 Firestore Rules 與 Auth 權限，不是隱藏 apiKey。
 
 export const firebaseConfig = {
-  apiKey: "YOUR_API_KEY",
-  authDomain: "YOUR_PROJECT_ID.firebaseapp.com",
-  projectId: "YOUR_PROJECT_ID",
-  storageBucket: "YOUR_PROJECT_ID.appspot.com",
-  messagingSenderId: "YOUR_MESSAGING_SENDER_ID",
-  appId: "YOUR_APP_ID"
+   apiKey: "AIzaSyAbQf6eh1KSnZhDZeSqc4RbJDjgIpqNd-I",
+  authDomain: "handover-system-cd60a.firebaseapp.com",
+  projectId: "handover-system-cd60a",
+  storageBucket: "handover-system-cd60a.firebasestorage.app",
+  messagingSenderId: "950652925778",
+  appId: "1:950652925778:web:51303af3c25a6a2cda6c8b",
 };
 
-export const firebaseEnabled = false; // 貼好設定後改成 true
+export const firebaseEnabled = true; // 貼好設定後改成 true
