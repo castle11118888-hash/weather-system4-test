@@ -1,9 +1,9 @@
 // firebase-config.js
 
 // ⭐ 判斷 test / prod
-const isTestEnv = location.hostname.includes("test");
+const isTestEnv = location.hostname.includes("test") || location.hostname.includes("localhost") || location.hostname.includes("127.0.0.1");
 
-// ⭐ 正式 Firebase（先不用填）
+// ⭐ 正式 Firebase（正式站要用時再替換）
 const firebaseConfigProd = {
   apiKey: "正式KEY",
   authDomain: "正式.firebaseapp.com",
@@ -26,7 +26,7 @@ const firebaseConfigTest = {
 // ⭐ 自動切換
 export const firebaseConfig = isTestEnv
   ? firebaseConfigTest
-  ; firebaseConfigProd;
+  : firebaseConfigProd;
 
 // ⭐ 開關
 export const firebaseEnabled = true;
