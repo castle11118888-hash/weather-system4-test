@@ -1,11 +1,12 @@
-const CACHE_NAME = "weather-handover-B6.8.1";
+const CACHE_NAME = "weather-handover-B7.3.7";
 const APP_SHELL = [
   "/",
   "/index.html",
   "/manifest.webmanifest",
   "/icon.svg",
   "/icon-192.svg",
-  "/icon-512.svg"
+  "/icon-512.svg",
+  "/auth-bridge.js"
 ];
 
 self.addEventListener("install", event => {
@@ -27,7 +28,27 @@ self.addEventListener("fetch", event => {
   if (event.request.method !== "GET") return;
   const url = new URL(event.request.url);
 
-  // Firebase / API requests should stay fresh.
+  if (url.pathname === "/" || url.pathname === "/index.html") {
+    event.respondWith(
+      fetch(event.request).then(async res => {
+        let text = await res.text();
+
+        // ⭐ 自動升級版本顯示
+        text = text.replace(/7\.3\.6/g, "7.3.7");
+
+        // ⭐ 自動注入登入系統
+        if (!text.includes("auth-bridge.js")) {
+          text = text.replace("</body>", `<script type=\"module\" src=\"/auth-bridge.js?v=7.3.7\"></script></body>`);
+        }
+
+        return new Response(text, {
+          headers: { "Content-Type": "text/html" }
+        });
+      }).catch(() => caches.match(event.request))
+    );
+    return;
+  }
+
   if (
     url.hostname.includes("firebase") ||
     url.hostname.includes("googleapis") ||
